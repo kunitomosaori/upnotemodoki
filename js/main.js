@@ -3,10 +3,10 @@ $(document).ready(function () {
     $("#key, #memo, #profile-name, #profile-dateofbirth, #save").addClass('hidden');
     $("#list").addClass('hidden');
 
-// ▽ボタン
-$("#list_display").on("click",function(){
-    $("#list").toggle();
-});
+    // ▽ボタン
+    $("#list_display").on("click", function () {
+        $("#list").toggle();
+    });
 
     // 新規作成ボタン
     $("#new-key").on("click", function () {
@@ -15,14 +15,14 @@ $("#list_display").on("click",function(){
         $("#memo").val("");
     });
 
-        // プロフィール作成ボタン
-        $("#dog-profile").on("click", function () {
-            $("#key, #memo, #profile-name, #profile-dateofbirth, #save").removeClass("hidden");
-            $("#key").val("初回登録情報");
-            $("#memo").val("性別：\n愛称：\n犬種：\n");  // テンプレートを追加
-            $("#profile-name").val("");  // テンプレートを追加
-            $("#profile-dateofbirth").val(""); // 例として固定日付を設定
-        });
+    // プロフィール作成ボタン
+    $("#dog-profile").on("click", function () {
+        $("#key, #memo, #profile-name, #profile-dateofbirth, #save").removeClass("hidden");
+        $("#key").val("初回登録情報");
+        $("#memo").val("性別：\n愛称：\n犬種：\n");  // テンプレートを追加
+        $("#profile-name").val("");  // テンプレートを追加
+        $("#profile-dateofbirth").val(""); // 例として固定日付を設定
+    });
 
     // 保存ボタン
     $("#save").on("click", function () {
