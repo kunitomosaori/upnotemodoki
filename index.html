@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>ぽちポケ</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+
+<body>
+
+  <header>
+  </header>
+
+  <main>
+
+    <div class="container">
+      <!-- サイドメニュー -->
+      <div class="side-menu">
+        <div class="notebooks">
+          <button id="list_display">▽</button>
+          <span>NOTEBOOKS</span>
+          <button id="new-key">＋</button>
+          <div id="list" class="hidden list">
+            <!-- ここに追加データが挿入される -->
+          </div>
+        </div>
+        <div class="side-menu-button">
+          <button id="dog-profile">profile</button>
+          <button id="clear">all clear</button>
+        </div>
+      </div>
+
+
+      <!-- メインメニュー -->
+      <div class="main-contents">
+        <h1>ぽちポケ</h1>
+        <input type="text" id="key" placeholder="タイトルを入力">
+        <textarea id="memo" placeholder="メモを入力"></textarea>
+        <!-- 初回登録情報のテンプレ　※hiddenを書き忘れないように！ -->
+        <textarea id="profile-name" placeholder="わんちゃんのなまえは？"></textarea>
+        <textarea id="profile-dateofbirth" placeholder="生年月日は？"></textarea>
+        <!-- 初回登録情報のテンプレ終わり -->
+        
+        <div class="main-fotter-button">
+          <button id="save">save</button>
+          <button id="save">update</button>
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+
+
+  </main>
+
+
+
+  <!-- jQueryの読み込み -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- 独自のJavaScriptファイルの読み込み -->
+  <script src="js/main.js"></script>
+</body>
+
+</body>
+
+</html>

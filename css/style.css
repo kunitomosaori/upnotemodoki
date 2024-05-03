@@ -1,0 +1,62 @@
+.body {
+    height: 100%;
+    overflow-x: hidden;
+    /*横スクロールバーを消す*/
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+}
+
+.side-menu {
+    width: 15%;
+    padding: 10px;
+    position: absolute;
+    height: 100%;
+    background-color: #faa;
+    border-right: 20px solid #c7e134;
+    display: flex;
+    flex-direction: column;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+}
+
+#list {
+    display: none;
+}
+
+.side-menu-button {
+    display: flex;
+    justify-content: left;
+}
+
+.main-contents {
+    margin-left: 18%;
+    /* サイドメニューの幅と余白に合わせて調整 */
+    padding: 10px;
+    background-color: rgba(255, 170, 170, 0.174);
+    flex: 1;
+    /* メインコンテンツが横幅全体に広がるように */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    /* 重なりを避けるためにrelativeを設定 */
+}
+
+h1 {
+    font-size: 50px;
+}
+
+#memo {
+    height: 300px;
+    /* 高さを300pxに設定 */
+}
+
+.hidden {
+    display: none;
+}
