@@ -45,7 +45,7 @@
         <textarea id="profile-name" placeholder="わんちゃんのなまえは？"></textarea>
         <textarea id="profile-dateofbirth" placeholder="生年月日は？"></textarea>
         <!-- 初回登録情報のテンプレ終わり -->
-        
+
         <div class="main-fotter-button">
           <button id="save">save</button>
           <button id="save">update</button>
@@ -67,6 +67,28 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <!-- 独自のJavaScriptファイルの読み込み -->
   <script src="js/main.js"></script>
+  <!-- 以下firebase -->
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+    import { getDatabase, ref, push, set, onChildAdded, remove, onChildRemoved }
+      from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDVq2QiPiot5hzhUMdrlj1ibJZPctDcTV4",
+      authDomain: "pochi-6400b.firebaseapp.com",
+      projectId: "pochi-6400b",
+      storageBucket: "pochi-6400b.appspot.com",
+      messagingSenderId: "882528790400",
+      appId: "1:882528790400:web:77c694ec929d3ca6698365"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+  </script>
 </body>
 
 </body>
