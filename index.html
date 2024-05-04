@@ -51,7 +51,9 @@
       <div class="main-contents">
         <input type="text" id="key" placeholder="タイトルを入力">
         <textarea id="memo" placeholder="メモを入力"></textarea>
-
+        <div>
+          <input type="text" id="tags" placeholder="タグを追加 (カンマ区切りで入力)">
+        </div>
         <div class="main-fotter-button">
           <button id="save">save</button>
         </div>
@@ -134,13 +136,15 @@
         onChildAdded(usermemoRef, (data) => {
           const memodata = data.val();
           const key = data.key;
+          const tags = memodata.tags.join(', '); // タグをカンマ区切りで表示
 
           // メモデータのタイトルを表示する要素
-          const item = $('<div>').addClass('clickable-item').text(memodata.title);
+          const item = $('<div>').addClass('clickable-item').html(`${memodata.title} <span class="tags">(${tags})</span>`);
 
           // データをクリックしたときのイベントハンドラを追加
           item.on('click', function () {
             updateMainContents(memodata.title, memodata.text);
+            $('#tags').val(tags); // タグを入力欄に表示
           });
 
           // 削除ボタンを追加
@@ -157,11 +161,13 @@
 
         // 保存ボタンのクリックイベント
         $('#save').on('click', function () {
+          const tags = $('#tags').val().split(',').map(tag => tag.trim()); // タグを配列として取得
           const msg = {
             title: $('#key').val(),
-            text: $('#memo').val()
+            text: $('#memo').val(),
+            tags: tags // タグを保存
           }
-          const dbRef = ref(db, `users/${uid}/memo/${msg.title}`);
+          const dbRef = ref(db, `users/${auth.currentUser.uid}/memo/${msg.title}`);
           set(dbRef, msg);
         });
 

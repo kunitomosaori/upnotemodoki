@@ -1,6 +1,6 @@
 $(document).ready(function () {
     // 最初は非表示にする
-    $("#key, #memo, #save").addClass('hidden');
+    $("#key, #memo, #tags, #save").addClass('hidden');
     $("#list").addClass('hidden');
 
     // ▽ボタン
@@ -13,6 +13,7 @@ $(document).ready(function () {
         $("#key, #memo, #save").removeClass("hidden");
         $("#key").val("");
         $("#memo").val("");
+        $("#tags").val(""); // タグの入力もクリア
     });
 
     // サイドメニューの表示・非表示を切り替え

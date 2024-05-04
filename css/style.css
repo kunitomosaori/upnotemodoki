@@ -137,6 +137,13 @@
     /* 重なりを避けるためにrelativeを設定 */
 }
 
+/* タグをカッコ内に表示 */
+.tags {
+    color: #555;
+    font-size: 0.9em;
+    margin-left: 5px;
+}
+
 /* サイドメニューを縮めたときのメインコンテンツの幅の処理 */
 .collapsed+.main-contents {
     margin-left: 60px; /* サイドメニューが縮小した場合の余白に合わせる (50px幅 + 間隔5px + ボーダー5px) */
