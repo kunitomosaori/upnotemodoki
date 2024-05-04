@@ -144,6 +144,14 @@
     margin-left: 5px;
 }
 
+#tags {
+    display: inline-block; /* 要素を表示 */
+    width: 100%; /* 必要に応じて調整 */
+    padding: 8px; /* 適切なパディング */
+    border: 1px solid #ccc; /* 必要に応じてボーダーを調整 */
+    box-sizing: border-box; /* パディングを含めた幅の調整 */
+}
+
 /* サイドメニューを縮めたときのメインコンテンツの幅の処理 */
 .collapsed+.main-contents {
     margin-left: 60px; /* サイドメニューが縮小した場合の余白に合わせる (50px幅 + 間隔5px + ボーダー5px) */

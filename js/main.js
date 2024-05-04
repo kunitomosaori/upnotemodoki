@@ -10,7 +10,7 @@ $(document).ready(function () {
 
     // 新規作成ボタン
     $("#new-key").on("click", function () {
-        $("#key, #memo, #save").removeClass("hidden");
+        $("#key, #memo, #tags, #save").removeClass("hidden");
         $("#key").val("");
         $("#memo").val("");
         $("#tags").val(""); // タグの入力もクリア

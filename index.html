@@ -18,9 +18,10 @@
   <header>
     <div class="header-wrapping">
       <h1 class="header-font">ぽちポケ</h1>
+      <input type="text" id="search-box" placeholder="search">
       <div class="header-text">
         <img src="" id="prof">
-        user name：<span id="uname"></span>
+        user name <span id="uname"></span>
         <button id="out">logout</button>
       </div>
     </div>
@@ -41,15 +42,14 @@
           </div>
         </div>
         <div class="side-menu-button">
-          <!-- <button id="dog-profile">profile</button> -->
-          <button id="clear">all clear</button>
+
         </div>
       </div>
 
 
       <!-- メインメニュー -->
       <div class="main-contents">
-        <input type="text" id="key" placeholder="タイトルを入力">
+        <input type="text" id="key" placeholder="タイトル">
         <textarea id="memo" placeholder="メモを入力"></textarea>
         <div>
           <input type="text" id="tags" placeholder="タグを追加 (カンマ区切りで入力)">
@@ -169,6 +169,21 @@
           }
           const dbRef = ref(db, `users/${auth.currentUser.uid}/memo/${msg.title}`);
           set(dbRef, msg);
+        });
+
+        updateList(); // 初期ロード時にリストを更新
+
+        // 検索処理
+        $('#search-box').on('input', function () {
+          const searchQuery = $(this).val().toLowerCase();
+          $('.clickable-item').each(function () {
+            const itemText = $(this).text().toLowerCase();
+            if (itemText.includes(searchQuery)) {
+              $(this).show(); // 検索に一致する場合は表示
+            } else {
+              $(this).hide(); // 一致しない場合は非表示
+            }
+          });
         });
 
         // 既存のメモデータを読み込むためのイベントリスナー
