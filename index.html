@@ -121,34 +121,9 @@
             //Login情報取得
             $("#uname").text(profile.displayName);
             $("#prof").attr("src", profile.photoURL);
-            // console.log("Sign-in provider: " + profile.providerId);
-            // console.log("Provider-specific UID: " + profile.uid);
-            // console.log("Email: " + profile.email);
-            // console.log("Photo URL: " + profile.photoURL);
           });
           $("#status").fadeOut(500);
         }
-
-        //保存ボタン
-        $("#save").on("click", function () {
-          const msg = {
-            title: $("#key").val(),
-            text: $("#memo").val()
-          }
-          const dbRef = ref(db, "users/" + uid + "/memo/" + $("#key").val()); //RealtimeDB内の"chat"を使う
-          set(dbRef, msg);  //DBに値をセットする
-        });
-
-        //最初にデータ取得＆onSnapshotでリアルタイムにデータを取得
-        $("#key").on("change", function () {
-          const dbRef = ref(db, "users/" + uid + "/memo/" + $(this).val()); //RealtimeDB内の"chat"を使う
-          onValue(dbRef, function (data) {
-            const msg = data.val(); //オブジェクトデータを取得し、変数msgに代入
-            console.log(msg);
-            // const key  = data.key;      //データのユニークキー（削除や更新に使用可能）
-            $("#memo").val(msg.text);
-          });
-        });
 
         // メモリストを取得するためのリファレンス
         const usermemoRef = ref(db, `users/${uid}/memo/`);
@@ -157,7 +132,9 @@
         onChildAdded(usermemoRef, (data) => {
           const memodata = data.val();
           const key = data.key;
-          const item = $('<div>').text(memodata.title);
+
+          // メモデータのタイトルを表示する要素
+          const item = $('<div>').addClass('clickable-item').text(memodata.title);
 
           // データをクリックしたときのイベントハンドラを追加
           item.on('click', function () {
@@ -165,7 +142,7 @@
           });
 
           // 削除ボタンを追加
-          const deleteButton = $('<button>').text('Delete');
+          const deleteButton = $('<button>').text('Delete').addClass('delete-button');
           deleteButton.on('click', function () {
             remove(ref(db, `users/${uid}/memo/${key}`));
             item.remove(); // 表示も削除
@@ -177,20 +154,30 @@
         });
 
         // 保存ボタンのクリックイベント
-        $("#save").on("click", function () {
+        $('#save').on('click', function () {
           const msg = {
-            title: $("#key").val(),
-            text: $("#memo").val()
+            title: $('#key').val(),
+            text: $('#memo').val()
           }
           const dbRef = ref(db, `users/${uid}/memo/${msg.title}`);
           set(dbRef, msg);
         });
 
+        // 既存のメモデータを読み込むためのイベントリスナー
+        $('#key').on('change', function () {
+          const key = $(this).val();
+          const dbRef = ref(db, `users/${uid}/memo/${key}`);
+          onValue(dbRef, (data) => {
+            const msg = data.val();
+            if (msg) {
+              $('#memo').val(msg.text);
+            }
+          });
+        });
       } else {
-        _redirect();  // User is signed out
+        _redirect(); // User is signed out
       }
     });
-
 
     //###############################################
     //Logout処理

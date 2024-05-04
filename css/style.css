@@ -35,6 +35,22 @@
     justify-content: left;
 }
 
+/* sidemenuのクリックのために追加 */
+.clickable-item {
+    cursor: pointer;
+    border-bottom: 1px solid #ccc;
+    padding: 5px;
+}
+
+.clickable-item:hover {
+    background-color: #f0f0f0;
+}
+
+.delete-button {
+    margin-left: 10px;
+}
+/* sidemenuのクリックのため　ここまで */
+
 .main-contents {
     margin-left: 18%;
     /* サイドメニューの幅と余白に合わせて調整 */
