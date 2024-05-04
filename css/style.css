@@ -1,3 +1,20 @@
+/* login画面 */
+.login-wrapping {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* 垂直方向の中央揃え */
+    height: 100vh; /* 画面全体を使用 */
+}
+
+.login-button {
+    padding: 10px 20px; /* ボタンの内側の余白 */
+    font-size: 16px; /* フォントサイズ */
+    background-color: #FFDD57; /* ボタンの背景色 */
+    border: none; /* ボーダーなし */
+    border-radius: 5px; /* ボタンの角を丸く */
+    cursor: pointer; /* ホバー時にポインタ表示 */
+}
+
 .body {
     height: 100%;
     overflow-x: hidden;
