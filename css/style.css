@@ -4,6 +4,30 @@
     /*横スクロールバーを消す*/
 }
 
+.header-wrapping{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: aqua;
+}
+
+.header-font{
+    font-size: 30px;
+    padding: 5px;
+}
+
+.header-text{
+    display: flex;
+    align-items: center;
+}
+
+.header-text img{
+    border-radius: 50%;  /* 角丸半径を50%にする(=円形にする) */
+    width: 30px;
+    height: auto;
+    padding: 5px;
+}
+
 .container {
     width: 100%;
     display: flex;

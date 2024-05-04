@@ -16,6 +16,14 @@
 
   <!-- コンテンツ表示画面 -->
   <header>
+    <div class="header-wrapping">
+      <h1 class="header-font">ぽちポケ</h1>
+      <div class="header-text">
+        <img src="" id="prof">
+        user name：<span id="uname"></span>
+        <button id="out">logout</button>
+      </div>
+    </div>
   </header>
 
   <main>
@@ -34,24 +42,14 @@
         <div class="side-menu-button">
           <!-- <button id="dog-profile">profile</button> -->
           <button id="clear">all clear</button>
-          <div>
-            <button id="out">logout</button>
-            名前：<span id="uname"></span><br>
-            <img src="" id="prof">
-          </div>
         </div>
       </div>
 
 
       <!-- メインメニュー -->
       <div class="main-contents">
-        <h1>ぽちポケ</h1>
         <input type="text" id="key" placeholder="タイトルを入力">
         <textarea id="memo" placeholder="メモを入力"></textarea>
-        <!-- 初回登録情報のテンプレ　※hiddenを書き忘れないように！ -->
-        <textarea id="profile-name" placeholder="わんちゃんのなまえは？"></textarea>
-        <textarea id="profile-dateofbirth" placeholder="生年月日は？"></textarea>
-        <!-- 初回登録情報のテンプレ終わり -->
 
         <div class="main-fotter-button">
           <button id="save">save</button>
