@@ -12,7 +12,6 @@
 
 
 <body>
-  <button id="out">ログアウト</button>
   <h1 id="status"> Login... </h1>
 
   <!-- コンテンツ表示画面 -->
@@ -33,8 +32,13 @@
           </div>
         </div>
         <div class="side-menu-button">
-          <button id="dog-profile">profile</button>
+          <!-- <button id="dog-profile">profile</button> -->
           <button id="clear">all clear</button>
+          <div>
+            <button id="out">logout</button>
+            名前：<span id="uname"></span><br>
+            <img src="" id="prof">
+          </div>
         </div>
       </div>
 
@@ -51,37 +55,12 @@
 
         <div class="main-fotter-button">
           <button id="save">save</button>
-          <button id="save">update</button>
         </div>
       </div>
-
     </div>
 
-
-    <!-- 試しに入れてみた -->
-    <div>
-      <div>
-        名前：<span id="uname"></span><br>
-        <img src="" id="prof">
-      </div>
-      <div>
-        <select id="title">
-          <option value="memo1">memo1</option>
-          <option value="memo2">memo2</option>
-          <option value="memo3">memo3</option>
-        </select>
-      </div>
-      <div>
-        <textarea id="text" cols="30" rows="10"></textarea>
-        <button id="send">送信</button>
-      </div>
-    </div>
-
-    <!-- お試し終わり -->
 
   </main>
-
-
 
   <!-- jQueryの読み込み -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -125,16 +104,18 @@
     provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
     const auth = getAuth();
 
-
     //###############################################
     //Loginしていれば処理します
     //###############################################
+    // リストのデータをクリックしたときにメインコンテンツに反映する
+    function updateMainContents(title, text) {
+      $("#key").val(title);
+      $("#memo").val(text);
+    }
+
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        const uid = user.uid;
-        //ユーザー情報取得できます
+        const uid = user.uid; //ユーザー情報取得できます
         if (user !== null) {
           user.providerData.forEach((profile) => {
             //Login情報取得
@@ -148,25 +129,61 @@
           $("#status").fadeOut(500);
         }
 
-        //データ登録(Click)
-        $("#send").on("click", function () {
+        //保存ボタン
+        $("#save").on("click", function () {
           const msg = {
-            title: $("#title").val(),
-            text: $("#text").val()
+            title: $("#key").val(),
+            text: $("#memo").val()
           }
-          const dbRef = ref(db, "users/" + uid + "/memo/" + $("#title").val()); //RealtimeDB内の"chat"を使う
+          const dbRef = ref(db, "users/" + uid + "/memo/" + $("#key").val()); //RealtimeDB内の"chat"を使う
           set(dbRef, msg);  //DBに値をセットする
         });
 
         //最初にデータ取得＆onSnapshotでリアルタイムにデータを取得
-        $("#title").on("change", function () {
+        $("#key").on("change", function () {
           const dbRef = ref(db, "users/" + uid + "/memo/" + $(this).val()); //RealtimeDB内の"chat"を使う
           onValue(dbRef, function (data) {
-            const msg = data.val();    //オブジェクトデータを取得し、変数msgに代入
+            const msg = data.val(); //オブジェクトデータを取得し、変数msgに代入
             console.log(msg);
             // const key  = data.key;      //データのユニークキー（削除や更新に使用可能）
-            $("#text").val(msg.text);
+            $("#memo").val(msg.text);
           });
+        });
+
+        // メモリストを取得するためのリファレンス
+        const usermemoRef = ref(db, `users/${uid}/memo/`);
+
+        // Adding data to the list
+        onChildAdded(usermemoRef, (data) => {
+          const memodata = data.val();
+          const key = data.key;
+          const item = $('<div>').text(memodata.title);
+
+          // データをクリックしたときのイベントハンドラを追加
+          item.on('click', function () {
+            updateMainContents(memodata.title, memodata.text);
+          });
+
+          // 削除ボタンを追加
+          const deleteButton = $('<button>').text('Delete');
+          deleteButton.on('click', function () {
+            remove(ref(db, `users/${uid}/memo/${key}`));
+            item.remove(); // 表示も削除
+          });
+
+          // リストに項目を追加
+          item.append(deleteButton);
+          $('#list').append(item);
+        });
+
+        // 保存ボタンのクリックイベント
+        $("#save").on("click", function () {
+          const msg = {
+            title: $("#key").val(),
+            text: $("#memo").val()
+          }
+          const dbRef = ref(db, `users/${uid}/memo/${msg.title}`);
+          set(dbRef, msg);
         });
 
       } else {
