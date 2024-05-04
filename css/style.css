@@ -1,19 +1,29 @@
-/* login画面 */
+/* login画面設定 */
 .login-wrapping {
     display: flex;
     justify-content: center;
-    align-items: center; /* 垂直方向の中央揃え */
-    height: 100vh; /* 画面全体を使用 */
+    align-items: center;
+    /* 垂直方向の中央揃え */
+    height: 100vh;
+    /* 画面全体を使用 */
 }
 
 .login-button {
-    padding: 10px 20px; /* ボタンの内側の余白 */
-    font-size: 16px; /* フォントサイズ */
-    background-color: #FFDD57; /* ボタンの背景色 */
-    border: none; /* ボーダーなし */
-    border-radius: 5px; /* ボタンの角を丸く */
-    cursor: pointer; /* ホバー時にポインタ表示 */
+    padding: 10px 20px;
+    /* ボタンの内側の余白 */
+    font-size: 16px;
+    /* フォントサイズ */
+    background-color: #FFDD57;
+    /* ボタンの背景色 */
+    border: none;
+    /* ボーダーなし */
+    border-radius: 5px;
+    /* ボタンの角を丸く */
+    cursor: pointer;
+    /* ホバー時にポインタ表示 */
 }
+
+/* login画面設定終了 */
 
 .body {
     height: 100%;
@@ -21,25 +31,26 @@
     /*横スクロールバーを消す*/
 }
 
-.header-wrapping{
+.header-wrapping {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: aqua;
 }
 
-.header-font{
+.header-font {
     font-size: 30px;
     padding: 5px;
 }
 
-.header-text{
+.header-text {
     display: flex;
     align-items: center;
 }
 
-.header-text img{
-    border-radius: 50%;  /* 角丸半径を50%にする(=円形にする) */
+.header-text img {
+    border-radius: 50%;
+    /* 角丸半径を50%にする(=円形にする) */
     width: 30px;
     height: auto;
     padding: 5px;
@@ -60,6 +71,7 @@
     border-right: 20px solid #c7e134;
     display: flex;
     flex-direction: column;
+    margin-right: 5px; /* サイドメニューとメインコンテンツの間隔 */
 }
 
 .list {
@@ -76,7 +88,25 @@
     justify-content: left;
 }
 
-/* sidemenuのクリックのために追加 */
+/* サイドメニューを縮小したときのスタイル */
+.collapsed {
+    width: 50px; /* 縮小する幅 */
+    border-right: 5px solid #c7e134; /* 縮小時のボーダーを狭める */
+    margin-right: 5px; /* 縮小時も間隔を保つ */
+    overflow: hidden; /* はみ出した要素を非表示に */
+}
+
+.collapsed #list_display_switch {
+    display: block; /* ボタンは表示 */
+}
+
+.collapsed .notebooks,
+.collapsed .side-menu-button {
+    display: none; /* 他の要素は非表示 */
+}
+/* サイドメニューを縮小したときのスタイル終わり */
+
+/* sidemenuの要素クリックのために追加 */
 .clickable-item {
     cursor: pointer;
     border-bottom: 1px solid #ccc;
@@ -90,11 +120,13 @@
 .delete-button {
     margin-left: 10px;
 }
-/* sidemenuのクリックのため　ここまで */
+
+/* sidemenuのクリック 終了 */
 
 .main-contents {
     margin-left: 18%;
     /* サイドメニューの幅と余白に合わせて調整 */
+    margin-left: calc(15% + 25px); /* 15%幅 + border + 間隔 */
     padding: 10px;
     background-color: rgba(255, 170, 170, 0.174);
     flex: 1;
@@ -103,6 +135,11 @@
     flex-direction: column;
     position: relative;
     /* 重なりを避けるためにrelativeを設定 */
+}
+
+/* サイドメニューを縮めたときのメインコンテンツの幅の処理 */
+.collapsed+.main-contents {
+    margin-left: 60px; /* サイドメニューが縮小した場合の余白に合わせる (50px幅 + 間隔5px + ボーダー5px) */
 }
 
 h1 {

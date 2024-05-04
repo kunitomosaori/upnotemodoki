@@ -31,6 +31,7 @@
     <div class="container">
       <!-- サイドメニュー -->
       <div class="side-menu">
+        <button id="list_display_switch">三</button>
         <div class="notebooks">
           <button id="list_display">▽</button>
           <span>NOTEBOOKS</span>
@@ -125,6 +126,9 @@
 
         // メモリストを取得するためのリファレンス
         const usermemoRef = ref(db, `users/${uid}/memo/`);
+
+        // 既存のリストをクリア
+        $('#list').empty();
 
         // Adding data to the list
         onChildAdded(usermemoRef, (data) => {

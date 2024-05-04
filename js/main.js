@@ -1,6 +1,6 @@
 $(document).ready(function () {
     // 最初は非表示にする
-    $("#key, #memo, #profile-name, #profile-dateofbirth, #save").addClass('hidden');
+    $("#key, #memo, #save").addClass('hidden');
     $("#list").addClass('hidden');
 
     // ▽ボタン
@@ -13,6 +13,12 @@ $(document).ready(function () {
         $("#key, #memo, #save").removeClass("hidden");
         $("#key").val("");
         $("#memo").val("");
+    });
+
+    // サイドメニューの表示・非表示を切り替え
+    $("#list_display_switch").on("click", function () {
+        $(".side-menu").toggleClass("collapsed");
+        $(".main-contents").toggleClass("collapsed"); // 対応するクラスの追加
     });
 
     updateList(); // 初期ロード時にリストを更新
