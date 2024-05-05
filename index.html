@@ -55,6 +55,12 @@
           <input type="text" id="tags" placeholder="タグを追加 (カンマ区切りで入力)">
         </div>
         <div class="main-fotter-button">
+          <div class="btn_wrap">
+            <span>背景の色</span>
+            <button type="button" class="bgBtn is_active" id="bg-white">白</button>
+            <button type="button" class="bgBtn" id="bg-blue">青</button>
+            <button type="button" class="bgBtn" id="bg-black">黒</button>
+          </div>
           <button id="save">save</button>
         </div>
       </div>
@@ -65,6 +71,8 @@
 
   <!-- jQueryの読み込み -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <!-- jQuery Cookieプラグインのインストールのため読み込み -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
   <!-- 独自のJavaScriptファイルの読み込み -->
   <script src="js/main.js"></script>
   <!-- 以下firebase -->

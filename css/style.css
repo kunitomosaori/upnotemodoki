@@ -71,7 +71,8 @@
     border-right: 20px solid #c7e134;
     display: flex;
     flex-direction: column;
-    margin-right: 5px; /* サイドメニューとメインコンテンツの間隔 */
+    margin-right: 5px;
+    /* サイドメニューとメインコンテンツの間隔 */
 }
 
 .list {
@@ -90,20 +91,27 @@
 
 /* サイドメニューを縮小したときのスタイル */
 .collapsed {
-    width: 50px; /* 縮小する幅 */
-    border-right: 5px solid #c7e134; /* 縮小時のボーダーを狭める */
-    margin-right: 5px; /* 縮小時も間隔を保つ */
-    overflow: hidden; /* はみ出した要素を非表示に */
+    width: 50px;
+    /* 縮小する幅 */
+    border-right: 5px solid #c7e134;
+    /* 縮小時のボーダーを狭める */
+    margin-right: 5px;
+    /* 縮小時も間隔を保つ */
+    overflow: hidden;
+    /* はみ出した要素を非表示に */
 }
 
 .collapsed #list_display_switch {
-    display: block; /* ボタンは表示 */
+    display: block;
+    /* ボタンは表示 */
 }
 
 .collapsed .notebooks,
 .collapsed .side-menu-button {
-    display: none; /* 他の要素は非表示 */
+    display: none;
+    /* 他の要素は非表示 */
 }
+
 /* サイドメニューを縮小したときのスタイル終わり */
 
 /* sidemenuの要素クリックのために追加 */
@@ -126,7 +134,8 @@
 .main-contents {
     margin-left: 18%;
     /* サイドメニューの幅と余白に合わせて調整 */
-    margin-left: calc(15% + 25px); /* 15%幅 + border + 間隔 */
+    margin-left: calc(15% + 25px);
+    /* 15%幅 + border + 間隔 */
     padding: 10px;
     background-color: rgba(255, 170, 170, 0.174);
     flex: 1;
@@ -145,16 +154,22 @@
 }
 
 #tags {
-    display: inline-block; /* 要素を表示 */
-    width: 100%; /* 必要に応じて調整 */
-    padding: 8px; /* 適切なパディング */
-    border: 1px solid #ccc; /* 必要に応じてボーダーを調整 */
-    box-sizing: border-box; /* パディングを含めた幅の調整 */
+    display: inline-block;
+    /* 要素を表示 */
+    width: 100%;
+    /* 必要に応じて調整 */
+    padding: 8px;
+    /* 適切なパディング */
+    border: 1px solid #ccc;
+    /* 必要に応じてボーダーを調整 */
+    box-sizing: border-box;
+    /* パディングを含めた幅の調整 */
 }
 
 /* サイドメニューを縮めたときのメインコンテンツの幅の処理 */
 .collapsed+.main-contents {
-    margin-left: 60px; /* サイドメニューが縮小した場合の余白に合わせる (50px幅 + 間隔5px + ボーダー5px) */
+    margin-left: 60px;
+    /* サイドメニューが縮小した場合の余白に合わせる (50px幅 + 間隔5px + ボーダー5px) */
 }
 
 h1 {
@@ -164,6 +179,33 @@ h1 {
 #memo {
     height: 300px;
     /* 高さを300pxに設定 */
+}
+
+:root {
+    --pink-to-yellow: #ff82a5;
+    --to-bgColor: white;
+    --to-white: black;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.btn_wrap {
+    margin: 20px;
+}
+
+.btn_wrap button {
+    font-size: 1.6rem;
+    padding: 5px 10px;
+    border: 1px solid #d9d9d9;
+    background: transparent;
+    color: var(--to-white);
+}
+
+.btn_wrap button.is_active {
+    background: var(--pink-to-yellow);
+    color: var(--to-bgColor);
 }
 
 .hidden {
