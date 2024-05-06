@@ -19,6 +19,7 @@
     <div class="header-wrapping">
       <div class="header-title-font">
       <button id="list_display_switch">三</button><h1 class="header-font">ぽちポケ</h1>
+    <img src="./img/bisyonn.png" alt="">
     </div>
       <input type="text" id="search-box" placeholder="search">
       <div class="header-text">
@@ -132,13 +133,13 @@
     //###############################################
     //Loginしていれば処理します
     //###############################################
-    // メインコンテンツを更新する関数
+    // メインコンテンツを更新する
     function updateMainContents(title, text) {
       $("#key").val(title);
       $("#memo").val(text);
     }
 
-    // タグを表示する関数
+    // タグを表示する
     function showAllTags(tags) {
       $("#tag_list").empty();
 
@@ -148,7 +149,7 @@
       });
     }
 
-    // タグをすべて取得して表示する関数
+    // タグをすべて取得して表示する
     function fetchAndShowTags(uid) {
       const usermemoRef = ref(db, `users/${uid}/memo/`);
       const tagCounts = {};
@@ -217,14 +218,6 @@
       }
     });
 
-    $("#out").on("click", function () {
-      signOut(auth).then(() => {
-        location.href = "login.html";
-      }).catch((error) => {
-        console.error(error);
-      });
-    });
-
     //###############################################
     //Logout処理
     //###############################################
@@ -241,7 +234,7 @@
 
 
     //###############################################
-    //Login画面へリダイレクト(関数作成)
+    //Login画面へリダイレクト作成)
     //###############################################
     function _redirect() {
       location.href = "login.html";

@@ -6,7 +6,9 @@
     /* 垂直方向の中央揃え */
     height: 100vh;
     /* 画面全体を使用 */
-    background-color: #79A1D4;
+    /* background-color: #79A1D4; */
+    background-image: url(/img/okumono-cat46.png);
+    background-repeat: repeat;
 }
 
 .login-button {
@@ -41,6 +43,10 @@
     color: #E9E9E9;
 }
 
+.header-wrapping img{
+    height: 50px;
+}
+
 .header-title-font{
     display: flex;
     align-items: center;
@@ -53,8 +59,8 @@
 
 #search-box {
     margin: 5px;
-    border: 1px solid #acacac;
-    color: #fff;
+    border: 1px solid #fff;
+    color: #79A1D4;
     opacity: .7;
     border-radius: 10px;
     padding: 10px;
@@ -65,7 +71,7 @@
     -moz-transition: all .3s;
     font-size: 16px;
     outline: none;
-    background-color: #acacac;
+    /* background-color: #acacac; */
 }
 
 #search-box:focus {
