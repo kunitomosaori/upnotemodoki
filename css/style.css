@@ -239,43 +239,17 @@
     /* 縦に揃えるため、左右のマージンをautoに設定 */
     display: block;
     /* ブロック要素として扱う */
-
-    &[type=text] {
-        border: 0px solid #868283;
-
-        &:placeholder-shown {
-            border: 0px solid #EAE4DA;
-        }
+    border: 0px solid #868283;
 
         &::placeholder {
             color: #A3A5AA;
-        }
-
-        &[type=submit] {
-            background: #79A1D4;
-            color: #EAE4DA;
-            border: 0px solid #79A1D4;
-            outline: 10px solid #fff;
-            width: calc(50% - 30px);
-            height: 40px;
-            margin: 0 30px -20px 0;
-            float: right;
-            font-weight: 800;
-            font-size: 0.7em;
-            letter-spacing: 1.8pt;
-            text-transform: uppercase;
-            cursor: pointer;
-
-            &:hover {
-                outline-width: 0;
-            }
         }
 
         &:focus {
             outline: 0;
         }
     }
-}
+
 
 #focus {
     position: absolute;

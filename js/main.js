@@ -1,15 +1,29 @@
 $(document).ready(function () {
-    // 最初は非表示にする
-
+    // 初期状態では必要な要素を非表示にする
     $("#key, #memo, #tags, #save").addClass('hidden');
     $("#list").addClass('hidden');
 
-    // ▽ボタン(notebooks)
+    // サイドメニューの表示・非表示を切り替え
+    $("#list_display_switch").on("click", function () {
+        $(".side-menu").toggleClass("collapsed");
+
+        // 「三」以外のサイドメニューの子要素を非表示にする
+        if ($(".side-menu").hasClass("collapsed")) {
+            $(".side-menu").children().not("#list_display_switch").hide();
+        } else {
+            $(".side-menu").children().show(); // 全ての子要素を再表示
+        }
+
+        // メインコンテンツの幅を変更
+        $(".main-contents").toggleClass("collapsed");
+    });
+
+    // ノートブックのリストを表示/非表示
     $("#list_display").on("click", function () {
         $("#list").toggleClass("hidden").toggle();
     });
 
-    // ▽ボタン(tags)
+    // タグのリストを表示/非表示
     $("#tag_list_display").on("click", function () {
         $("#tag_list").toggleClass("hidden").toggle();
     });
@@ -19,16 +33,11 @@ $(document).ready(function () {
         $("#key, #memo, #tags, #save").removeClass("hidden");
         $("#key").val("");
         $("#memo").val("");
-        $("#tags").val(""); // タグの入力もクリア
+        $("#tags").val("");
     });
 
-    // サイドメニューの表示・非表示を切り替え
-    $("#list_display_switch").on("click", function () {
-        $(".side-menu").toggleClass("collapsed");
-        $(".main-contents").toggleClass("collapsed"); // 対応するクラスの追加
-    });
-
-    updateList(); // 初期ロード時にリストを更新
+    // 初期ロード時にリストを更新
+    updateList();
 });
 
 $(document).ready(function () {
