@@ -163,6 +163,9 @@
           item.on('click', function () {
             updateMainContents(memodata.title, memodata.text);
             $('#tags').val(tags); // タグを入力欄に表示
+
+            // saveボタンを表示
+            $('#save').removeClass('hidden');
           });
 
           // 削除ボタンを追加

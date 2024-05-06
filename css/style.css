@@ -82,6 +82,20 @@
     padding: 5px;
 }
 
+#out {
+    background-color: #9FBCDF; /* 背景色を赤に */
+    color: white; /* テキストを白に */
+    border: none; /* ボーダーなし */
+    border-radius: 5px; /* 角を丸くする */
+    padding: 8px 16px; /* 内側の余白 */
+    font-size: 14px; /* フォントサイズ */
+    cursor: pointer; /* カーソルをポインタに */
+    transition: background-color 0.3s; /* 背景色の変更をスムーズに */
+}
+
+#out:hover {
+    background-color: #ABCAE8; /* マウスオーバー時の背景色を薄くする */
+}
 .container {
     width: 100%;
     display: flex;
@@ -102,6 +116,22 @@
     margin-right: 5px;
     /* サイドメニューとメインコンテンツの間隔 */
     color: #E9E9E9;
+}
+
+/* デリートボタンのCSSスタイル */
+.delete-button {
+    background-color: #79A1D4; /* 背景色を赤に */
+    color: white; /* テキストを白に */
+    border: none; /* ボーダーなし */
+    border-radius: 5px; /* 角を丸くする */
+    padding: 8px 16px; /* 内側の余白 */
+    font-size: 14px; /* フォントサイズ */
+    cursor: pointer; /* カーソルをポインタに */
+    transition: background-color 0.3s; /* 背景色の変更をスムーズに */
+}
+
+.delete-button:hover {
+    background-color: #ABCAE8; /* マウスオーバー時の背景色を薄くする */
 }
 
 .list {
@@ -167,6 +197,11 @@
     /* カーソルをポインタに */
     z-index: 1;
     /* 他の要素より前に表示する */
+    transition: background-color 0.3s; /* 背景色の変更をスムーズに */
+}
+
+#list_display_switch:hover {
+    background-color: #ABCAE8; /* マウスオーバー時の背景色を薄くする */
 }
 
 #new-key {
@@ -184,6 +219,11 @@
     /* カーソルをポインタに */
     z-index: 1;
     /* 他の要素より前に表示する */
+    transition: background-color 0.3s; /* 背景色の変更をスムーズに */
+}
+
+#new-key:hover {
+    background-color: #ABCAE8; /* マウスオーバー時の背景色を薄くする */
 }
 
 #list_display, #tag_list_display{
