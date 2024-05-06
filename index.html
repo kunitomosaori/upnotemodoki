@@ -113,15 +113,6 @@
     provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
     const auth = getAuth();
 
-    //###############################################
-    //Loginしていれば処理します
-    //###############################################
-    // リストのデータをクリックしたときにメインコンテンツに反映する
-    function updateMainContents(title, text) {
-      $("#key").val(title);
-      $("#memo").val(text);
-    }
-
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const uid = user.uid; //ユーザー情報取得できます
@@ -133,124 +124,102 @@
           });
           $("#status").fadeOut(500);
         }
+      }})
+      
+    //###############################################
+    //Loginしていれば処理します
+    //###############################################
+    // メインコンテンツを更新する関数
+    function updateMainContents(title, text) {
+      $("#key").val(title);
+      $("#memo").val(text);
+    }
 
-        // メモリストを取得するためのリファレンス
+    // タグを表示する関数
+    function showAllTags(tags) {
+      $("#tag_list").empty();
+
+      Object.entries(tags).forEach(([tag, count]) => {
+        const tagItem = $('<div>').addClass('tag-item').text(`# ${tag} [${count}]`);
+        $("#tag_list").append(tagItem);
+      });
+    }
+
+    // タグをすべて取得して表示する関数
+    function fetchAndShowTags(uid) {
+      const usermemoRef = ref(db, `users/${uid}/memo/`);
+      const tagCounts = {};
+
+      onChildAdded(usermemoRef, (data) => {
+        const memodata = data.val();
+        if (memodata && memodata.tags) {
+          memodata.tags.forEach(tag => {
+            tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+          });
+          showAllTags(tagCounts);
+        }
+      });
+    }
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        fetchAndShowTags(uid); // タグをすべて取得して表示
+
         const usermemoRef = ref(db, `users/${uid}/memo/`);
 
-        // タグデータを取得するためのリファレンス
-        const tagsRef = ref(db, `users/${uid}/tags/`);
-
-        // タグを保存する関数
-        function saveTag(uid, tag) {
-          const tagRef = ref(db, `users/${uid}/tags/${tag}`);
-          set(tagRef, { name: tag }); // タグ名などを保存
-        }
-
-        // 既存のリストをクリア
-        $('#list').empty();
-
-        // Adding data to the list
         onChildAdded(usermemoRef, (data) => {
           const memodata = data.val();
-          console.log("Memo data:", memodata); // データの取得を確認
           const key = data.key;
-          const tags = memodata.tags ? memodata.tags.join(', ') : ''; // タグをカンマ区切りで表示
+          const tags = memodata.tags ? memodata.tags.join(', ') : '';
 
-          // メモデータのタイトルを表示する要素
           const item = $('<div>').addClass('clickable-item').html(`${memodata.title} <span class="tags">(${tags})</span>`);
 
-          // データをクリックしたときのイベントハンドラを追加
           item.on('click', function () {
             updateMainContents(memodata.title, memodata.text);
-            $('#tags').val(tags); // タグを入力欄に表示
+            $('#tags').val(tags);
+            $('#save').removeClass('hidden');
           });
 
-          // 削除ボタンを追加
           const deleteButton = $('<button>').text('Delete').addClass('delete-button');
           deleteButton.on('click', function () {
             remove(ref(db, `users/${uid}/memo/${key}`));
-            item.remove(); // 表示も削除
+            item.remove();
           });
 
-          // リストに項目を追加
           item.append(deleteButton);
           $('#list').append(item);
         });
 
-        // タグリストの更新
-        function updateTagsList(tags) {
-          $("#tag_list").empty(); // タグリストをクリア
-          console.log("Updating tag list with:", tags);
-
-          tags.forEach((tag) => {
-            const tagItem = $('<div>').addClass('tag-item').text(tag);
-            tagItem.on('click', function () {
-              $('.clickable-item').each(function () {
-                const itemText = $(this).text();
-                if (itemText.includes(tag)) {
-                  $(this).show();
-                } else {
-                  $(this).hide();
-                }
-              });
-            });
-            $("#tag_list").append(tagItem);
-          });
-        }
-
-        // タグリストを取得し表示
-        onValue(tagsRef, (snapshot) => {
-          const tagsData = snapshot.val();
-          console.log("Tags data:", tagsData); // データが存在するか確認
-          if (tagsData) {
-            const tags = Object.keys(tagsData);
-            updateTagsList(tags);
-          } else {
-            console.log("No tags found");
-          }
-        });
-
-        // 保存ボタンのクリックイベント
         $('#save').on('click', function () {
-          const tags = $('#tags').val().split(',').map(tag => tag.trim()); // タグを配列として取得
+          const title = $('#key').val();
+          const text = $('#memo').val();
+          const tags = $('#tags').val().split(',').map(tag => tag.trim());
+
           const msg = {
-            title: $('#key').val(),
-            text: $('#memo').val(),
-            tags: tags // タグをメモと同じ階層に保存
-          }
-          const dbRef = ref(db, `users/${auth.currentUser.uid}/memo/${msg.title}`);
-          set(dbRef, msg);
-        });
+            title,
+            text,
+            tags
+          };
 
-        updateList(); // 初期ロード時にリストを更新
-
-        // 検索処理
-        $('#search-box').on('input', function () {
-          const searchQuery = $(this).val().toLowerCase();
-          $('.clickable-item').each(function () {
-            const itemText = $(this).text().toLowerCase();
-            if (itemText.includes(searchQuery)) {
-              $(this).show(); // 検索に一致する場合は表示
-            } else {
-              $(this).hide(); // 一致しない場合は非表示
-            }
-          });
-        });
-
-        // 既存のメモデータを読み込むためのイベントリスナー
-        $('#key').on('change', function () {
-          const key = $(this).val();
-          const dbRef = ref(db, `users/${uid}/memo/${key}`);
-          onValue(dbRef, (data) => {
-            const msg = data.val();
-            if (msg) {
-              $('#memo').val(msg.text);
-            }
+          const dbRef = ref(db, `users/${auth.currentUser.uid}/memo/${title}`);
+          set(dbRef, msg).then(() => {
+            fetchAndShowTags(uid); // 保存後にタグリストを再表示
+          }).catch((error) => {
+            console.error("Error saving data:", error);
           });
         });
       } else {
-        _redirect(); // User is signed out
+        location.href = "login.html";
       }
+    });
+
+    $("#out").on("click", function () {
+      signOut(auth).then(() => {
+        location.href = "login.html";
+      }).catch((error) => {
+        console.error(error);
+      });
     });
 
     //###############################################

@@ -1,8 +1,4 @@
 $(document).ready(function () {
-    // 初期状態では必要な要素を非表示にする
-    $("#key, #memo, #tags, #save").addClass('hidden');
-    $("#list").addClass('hidden');
-
     // サイドメニューの表示・非表示を切り替え
     $("#list_display_switch").on("click", function () {
         $(".side-menu").toggleClass("collapsed");
@@ -91,3 +87,41 @@ $(document).ready(function () {
         }, 0);
     });
 });
+
+function saveStateToLocalStorage() {
+    const title = $('#key').val();
+    const text = $('#memo').val();
+    const tags = $('#tags').val();
+
+    const state = {
+        title,
+        text,
+        tags
+    };
+
+    // ローカルストレージに状態を保存
+    localStorage.setItem('lastState', JSON.stringify(state));
+}
+
+// ページを閉じる前に状態を保存
+window.addEventListener('beforeunload', saveStateToLocalStorage);
+
+// 保存ボタンがクリックされた際にも状態を保存
+$('#save').on('click', function () {
+    saveStateToLocalStorage();
+});
+
+function loadStateFromLocalStorage() {
+    const lastState = localStorage.getItem('lastState');
+
+    if (lastState) {
+        const { title, text, tags } = JSON.parse(lastState);
+
+        $('#key').val(title);
+        $('#memo').val(text);
+        $('#tags').val(tags);
+    }
+}
+
+// ページ読み込み時に状態を復元
+$(document).ready(loadStateFromLocalStorage);
