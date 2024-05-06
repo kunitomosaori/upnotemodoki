@@ -1,18 +1,17 @@
 $(document).ready(function () {
     // 最初は非表示にする
-    
+
     $("#key, #memo, #tags, #save").addClass('hidden');
     $("#list").addClass('hidden');
 
     // ▽ボタン(notebooks)
     $("#list_display").on("click", function () {
-        $("#list").toggle();
+        $("#list").toggleClass("hidden").toggle();
     });
 
     // ▽ボタン(tags)
     $("#tag_list_display").on("click", function () {
-        console.log("Tag list display button clicked");
-        $("#tag_list").toggle();
+        $("#tag_list").toggleClass("hidden").toggle();
     });
 
     // 新規作成ボタン

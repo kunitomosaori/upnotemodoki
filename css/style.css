@@ -241,10 +241,10 @@
     /* ブロック要素として扱う */
 
     &[type=text] {
-        border: 1px solid #868283;
+        border: 0px solid #868283;
 
         &:placeholder-shown {
-            border: 1px solid #EAE4DA;
+            border: 0px solid #EAE4DA;
         }
 
         &::placeholder {
@@ -252,9 +252,9 @@
         }
 
         &[type=submit] {
-            background: #D09B52;
+            background: #79A1D4;
             color: #EAE4DA;
-            border: 1px solid #D09B52;
+            border: 0px solid #79A1D4;
             outline: 10px solid #fff;
             width: calc(50% - 30px);
             height: 40px;
@@ -279,8 +279,8 @@
 
 #focus {
     position: absolute;
-    border: 0px solid #D09B52;
-    box-shadow: 0 0 10px 0 #D09B52;
+    border: 0px solid #79A1D4;
+    box-shadow: 0 0 10px 0 #79A1D4;
     pointer-events: none;
     z-index: 5;
     border-radius: 10px;
