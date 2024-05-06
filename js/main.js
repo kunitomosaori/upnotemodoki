@@ -1,11 +1,18 @@
 $(document).ready(function () {
     // 最初は非表示にする
+    
     $("#key, #memo, #tags, #save").addClass('hidden');
     $("#list").addClass('hidden');
 
-    // ▽ボタン
+    // ▽ボタン(notebooks)
     $("#list_display").on("click", function () {
         $("#list").toggle();
+    });
+
+    // ▽ボタン(tags)
+    $("#tag_list_display").on("click", function () {
+        console.log("Tag list display button clicked");
+        $("#tag_list").toggle();
     });
 
     // 新規作成ボタン
@@ -25,7 +32,7 @@ $(document).ready(function () {
     updateList(); // 初期ロード時にリストを更新
 });
 
-$(document).ready(function() {
+$(document).ready(function () {
     const CONTAINER = $(".main-contents"); // フォームまたは適切な要素に変更
     const ELEMENTS = ["#key", "#memo", "#tags"]; // 対象の要素リスト
 
@@ -54,12 +61,12 @@ $(document).ready(function() {
     }
 
     // 各要素にフォーカス時のイベントリスナーを設定
-    CONTAINER.find(ELEMENTS.join(", ")).each(function() {
-        $(this).focus(function() {
+    CONTAINER.find(ELEMENTS.join(", ")).each(function () {
+        $(this).focus(function () {
             const el = $(this);
 
             // ウィンドウサイズ変更時に位置を再計算
-            $(window).resize(function() {
+            $(window).resize(function () {
                 position(el);
             });
 
@@ -68,8 +75,8 @@ $(document).ready(function() {
     });
 
     // フォーカスが外れたときにフェードアウト
-    CONTAINER.on("focusout", function(e) {
-        setTimeout(function() {
+    CONTAINER.on("focusout", function (e) {
+        setTimeout(function () {
             if (!e.delegateTarget.contains(document.activeElement)) {
                 FOCUS.fadeOut(200);
             }

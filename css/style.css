@@ -109,7 +109,7 @@
     flex-direction: column;
 }
 
-#list {
+#list, #tag_list {
     display: none;
 }
 
@@ -130,8 +130,8 @@
     /* ボタンは表示 */
 }
 
-.collapsed .notebooks,
-.collapsed .side-menu-button {
+.collapsed .notebooks 
+.collapsed .tag-menu{
     display: none;
     /* 他の要素は非表示 */
 }
@@ -186,7 +186,7 @@
     /* 他の要素より前に表示する */
 }
 
-#list_display {
+#list_display, #tag_list_display{
     padding: 5px 10px;
     /* ボタンの内側の余白 */
     background-color: #454545;
