@@ -39,6 +39,7 @@
         const firebaseConfig = {
             apiKey: "AIzaSyDVq2QiPiot5hzhUMdrlj1ibJZPctDcTV4",
             authDomain: "pochi-6400b.firebaseapp.com",
+            databaseURL: "https://pochi-6400b-default-rtdb.firebaseio.com",
             projectId: "pochi-6400b",
             storageBucket: "pochi-6400b.appspot.com",
             messagingSenderId: "882528790400",
@@ -61,7 +62,7 @@
             //Google認証完了後の処理
             signInWithPopup(auth, provider).then((result) => {
                 //Login後のページ遷移
-                location.href = "memo_app.html"; // 遷移先次ページ
+                location.href = "index.html"; // 遷移先次ページ
             }).catch((error) => {
                 // Handle Errors here.
                 const errorCode = error.code;
