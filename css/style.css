@@ -6,18 +6,20 @@
     /* 垂直方向の中央揃え */
     height: 100vh;
     /* 画面全体を使用 */
+    background-color: #79A1D4;
 }
 
 .login-button {
-    padding: 10px 20px;
+    padding: 10px 80px;
     /* ボタンの内側の余白 */
     font-size: 16px;
     /* フォントサイズ */
-    background-color: #FFDD57;
+    background-color: #E9E9E9;
+    color: #79A1D4;
     /* ボタンの背景色 */
     border: none;
     /* ボーダーなし */
-    border-radius: 5px;
+    border-radius: 10px;
     /* ボタンの角を丸く */
     cursor: pointer;
     /* ホバー時にポインタ表示 */
@@ -28,6 +30,7 @@
 .body {
     height: 100%;
     overflow-x: hidden;
+    background-color: #FFEED5;
     /*横スクロールバーを消す*/
 }
 
@@ -35,12 +38,35 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: aqua;
+    background-color: #79A1D4;
+    color: #E9E9E9;
 }
 
 .header-font {
     font-size: 30px;
     padding: 5px;
+}
+
+#search-box {
+    margin: 5px;
+    border: 1px solid #acacac;
+    color: #fff;
+    opacity: .7;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    width: 400px;
+    transition: all .3s;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    font-size: 16px;
+    outline: none;
+    background-color: #acacac;
+}
+
+#search-box:focus {
+    width: 500px;
+    outline: none;
 }
 
 .header-text {
@@ -60,6 +86,8 @@
     width: 100%;
     display: flex;
     align-items: flex-start;
+    height: 100vh;
+    /* 画面全体を使用するように高さを指定 */
 }
 
 .side-menu {
@@ -67,12 +95,13 @@
     padding: 10px;
     position: absolute;
     height: 100%;
-    background-color: #faa;
-    border-right: 20px solid #c7e134;
+    background-color: #454545;
+    border-right: 20px solid #FFEED5;
     display: flex;
     flex-direction: column;
     margin-right: 5px;
     /* サイドメニューとメインコンテンツの間隔 */
+    color: #E9E9E9;
 }
 
 .list {
@@ -84,16 +113,11 @@
     display: none;
 }
 
-.side-menu-button {
-    display: flex;
-    justify-content: left;
-}
-
 /* サイドメニューを縮小したときのスタイル */
 .collapsed {
     width: 50px;
     /* 縮小する幅 */
-    border-right: 5px solid #c7e134;
+    border-right: 5px solid #FFEED5;
     /* 縮小時のボーダーを狭める */
     margin-right: 5px;
     /* 縮小時も間隔を保つ */
@@ -117,12 +141,66 @@
 /* sidemenuの要素クリックのために追加 */
 .clickable-item {
     cursor: pointer;
-    border-bottom: 1px solid #ccc;
-    padding: 5px;
+    border-bottom: 1px solid #9FBCDF;
+    padding: 10px;
 }
 
 .clickable-item:hover {
-    background-color: #f0f0f0;
+    background-color: #9FBCDF;
+}
+
+#list_display_switch {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    padding: 5px 5px;
+    /* ボタンの内側の余白 */
+    background-color: #79A1D4;
+    /* 背景色 */
+    color: #EAE4DA;
+    /* テキストの色 */
+    border: none;
+    /* ボーダーを消す */
+    border-radius: 5px;
+    /* 角を丸くする */
+    cursor: pointer;
+    /* カーソルをポインタに */
+    z-index: 1;
+    /* 他の要素より前に表示する */
+}
+
+#new-key {
+    padding: 5px 10px;
+    /* ボタンの内側の余白 */
+    background-color: #79A1D4;
+    /* 背景色 */
+    color: #EAE4DA;
+    /* テキストの色 */
+    border: none;
+    /* ボーダーを消す */
+    border-radius: 5px;
+    /* 角を丸くする */
+    cursor: pointer;
+    /* カーソルをポインタに */
+    z-index: 1;
+    /* 他の要素より前に表示する */
+}
+
+#list_display {
+    padding: 5px 10px;
+    /* ボタンの内側の余白 */
+    background-color: #454545;
+    /* 背景色 */
+    color: #EAE4DA;
+    /* テキストの色 */
+    border: none;
+    /* ボーダーを消す */
+    border-radius: 5px;
+    /* 角を丸くする */
+    cursor: pointer;
+    /* カーソルをポインタに */
+    z-index: 1;
+    /* 他の要素より前に表示する */
 }
 
 .delete-button {
@@ -132,38 +210,114 @@
 /* sidemenuのクリック 終了 */
 
 .main-contents {
-    margin-left: 18%;
-    /* サイドメニューの幅と余白に合わせて調整 */
     margin-left: calc(15% + 25px);
     /* 15%幅 + border + 間隔 */
     padding: 10px;
-    background-color: rgba(255, 170, 170, 0.174);
+    background-color: #FFEED5;
     flex: 1;
     /* メインコンテンツが横幅全体に広がるように */
     display: flex;
     flex-direction: column;
     position: relative;
     /* 重なりを避けるためにrelativeを設定 */
+    height: 100%;
+    /* サイドメニューと同じ高さにするため追加 */
+    overflow-y: auto;
+    /* 縦スクロールを可能に */
+}
+
+/* 記入ボックスに枠をつける */
+#key,
+#memo,
+#tags {
+    width: calc(90% - 30px);
+    padding: 10px 15px;
+    border-radius: 10px;
+    transition: .3s ease;
+    color: #868283;
+    margin: 10px auto;
+    /* 縦に揃えるため、左右のマージンをautoに設定 */
+    display: block;
+    /* ブロック要素として扱う */
+
+    &[type=text] {
+        border: 1px solid #868283;
+
+        &:placeholder-shown {
+            border: 1px solid #EAE4DA;
+        }
+
+        &::placeholder {
+            color: #A3A5AA;
+        }
+
+        &[type=submit] {
+            background: #D09B52;
+            color: #EAE4DA;
+            border: 1px solid #D09B52;
+            outline: 10px solid #fff;
+            width: calc(50% - 30px);
+            height: 40px;
+            margin: 0 30px -20px 0;
+            float: right;
+            font-weight: 800;
+            font-size: 0.7em;
+            letter-spacing: 1.8pt;
+            text-transform: uppercase;
+            cursor: pointer;
+
+            &:hover {
+                outline-width: 0;
+            }
+        }
+
+        &:focus {
+            outline: 0;
+        }
+    }
+}
+
+#focus {
+    position: absolute;
+    border: 0px solid #D09B52;
+    box-shadow: 0 0 10px 0 #D09B52;
+    pointer-events: none;
+    z-index: 5;
+    border-radius: 10px;
+    display: none;
 }
 
 /* タグをカッコ内に表示 */
 .tags {
-    color: #555;
+    color: #888897;
     font-size: 0.9em;
     margin-left: 5px;
 }
 
-#tags {
-    display: inline-block;
-    /* 要素を表示 */
-    width: 100%;
-    /* 必要に応じて調整 */
-    padding: 8px;
-    /* 適切なパディング */
-    border: 1px solid #ccc;
-    /* 必要に応じてボーダーを調整 */
-    box-sizing: border-box;
-    /* パディングを含めた幅の調整 */
+.main-fotter-button {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    /* 余白を追加 */
+    background-color: #FFEED5;
+    /* 背景色をmain-contentsと一致させる */
+}
+
+#save {
+    padding: 10px 20px;
+    /* ボタンの内側の余白 */
+    background-color: #79A1D4;
+    /* 背景色 */
+    color: #EAE4DA;
+    /* テキストの色 */
+    border: none;
+    /* ボーダーを消す */
+    border-radius: 5px;
+    /* 角を丸くする */
+    cursor: pointer;
+    /* カーソルをポインタに */
+    z-index: 1;
+    /* 他の要素より前に表示する */
 }
 
 /* サイドメニューを縮めたときのメインコンテンツの幅の処理 */
@@ -179,33 +333,6 @@ h1 {
 #memo {
     height: 300px;
     /* 高さを300pxに設定 */
-}
-
-:root {
-    --pink-to-yellow: #ff82a5;
-    --to-bgColor: white;
-    --to-white: black;
-}
-
-button:hover {
-    cursor: pointer;
-}
-
-.btn_wrap {
-    margin: 20px;
-}
-
-.btn_wrap button {
-    font-size: 1.6rem;
-    padding: 5px 10px;
-    border: 1px solid #d9d9d9;
-    background: transparent;
-    color: var(--to-white);
-}
-
-.btn_wrap button.is_active {
-    background: var(--pink-to-yellow);
-    color: var(--to-bgColor);
 }
 
 .hidden {

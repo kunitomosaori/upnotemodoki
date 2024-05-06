@@ -25,56 +25,54 @@ $(document).ready(function () {
     updateList(); // 初期ロード時にリストを更新
 });
 
-// memoの背景変更
 $(document).ready(function() {
-    $('.bgBtn').click(function() {
-        $.cookie('bgColor', this.id, { expires: 7, path: '/' });
-        $('.bgBtn').removeClass('is_active');
-        switch (this.id) {
-            case 'bg-white':
-                bgWhite();
-                break;
-            case 'bg-blue':
-                bgBlue();
-                break;
-            case 'bg-black':
-                bgBlack();
-                break;
-        }
+    const CONTAINER = $(".main-contents"); // フォームまたは適切な要素に変更
+    const ELEMENTS = ["#key", "#memo", "#tags"]; // 対象の要素リスト
+
+    // フォーカス用の要素を追加
+    const FOCUS = $("<div id='focus'></div>").appendTo("body");
+
+    // 要素の位置を設定する関数
+    function position(e) {
+        const props = {
+            top: e.offset().top,
+            left: e.offset().left,
+            width: e.outerWidth(),
+            height: e.outerHeight(),
+            radius: parseInt(e.css("border-radius"))
+        };
+
+        FOCUS.css({
+            top: props.top,
+            left: props.left,
+            width: props.width,
+            height: props.height,
+            "border-radius": props.radius
+        });
+
+        FOCUS.fadeIn(200);
+    }
+
+    // 各要素にフォーカス時のイベントリスナーを設定
+    CONTAINER.find(ELEMENTS.join(", ")).each(function() {
+        $(this).focus(function() {
+            const el = $(this);
+
+            // ウィンドウサイズ変更時に位置を再計算
+            $(window).resize(function() {
+                position(el);
+            });
+
+            position(el);
+        });
     });
 
-    function bgWhite() {
-        $('#bg-white').addClass('is_active');
-        $('#memo').css('background', 'white');
-        $('#memo').css('color', 'black');
-    }
-
-    function bgBlue() {
-        $('#bg-blue').addClass('is_active');
-        $('#memo').css('background', 'blue');
-        $('#memo').css('color', 'white');
-    }
-
-    function bgBlack() {
-        $('#bg-black').addClass('is_active');
-        $('#memo').css('background', 'black');
-        $('#memo').css('color', 'white');
-    }
-
-    // 初回ロード時の処理
-    let bg = $.cookie('bgColor');
-    if (bg) {
-        $('.bgBtn').removeClass('is_active');
-        switch (bg) {
-            case 'bg-white':
-                bgWhite();
-                break;
-            case 'bg-blue':
-                bgBlue();
-                break;
-            case 'bg-black':
-                bgBlack();
-                break;
-        }
-    }
+    // フォーカスが外れたときにフェードアウト
+    CONTAINER.on("focusout", function(e) {
+        setTimeout(function() {
+            if (!e.delegateTarget.contains(document.activeElement)) {
+                FOCUS.fadeOut(200);
+            }
+        }, 0);
+    });
 });

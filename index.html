@@ -21,7 +21,7 @@
       <input type="text" id="search-box" placeholder="search">
       <div class="header-text">
         <img src="" id="prof">
-        user name <span id="uname"></span>
+        <span id="uname"></span><!-- ユーザー名表示 -->
         <button id="out">logout</button>
       </div>
     </div>
@@ -34,8 +34,8 @@
       <div class="side-menu">
         <button id="list_display_switch">三</button>
         <div class="notebooks">
-          <button id="list_display">▽</button>
           <span>NOTEBOOKS</span>
+          <button id="list_display">▽</button>
           <button id="new-key">＋</button>
           <div id="list" class="hidden list">
             <!-- ここに追加データが挿入される -->
@@ -52,18 +52,11 @@
         <input type="text" id="key" placeholder="タイトル">
         <textarea id="memo" placeholder="メモを入力"></textarea>
         <div>
-          <input type="text" id="tags" placeholder="タグを追加 (カンマ区切りで入力)">
+            <input type="text" id="tags" placeholder="タグを追加 (カンマ区切りで入力)">
         </div>
         <div class="main-fotter-button">
-          <div class="btn_wrap">
-            <span>背景の色</span>
-            <button type="button" class="bgBtn is_active" id="bg-white">白</button>
-            <button type="button" class="bgBtn" id="bg-blue">青</button>
-            <button type="button" class="bgBtn" id="bg-black">黒</button>
-          </div>
-          <button id="save">save</button>
+            <button id="save">save</button>
         </div>
-      </div>
     </div>
 
 
