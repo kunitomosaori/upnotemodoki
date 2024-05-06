@@ -24,7 +24,6 @@
     cursor: pointer;
     /* ホバー時にポインタ表示 */
 }
-
 /* login画面設定終了 */
 
 .body {
@@ -40,6 +39,11 @@
     align-items: center;
     background-color: #79A1D4;
     color: #E9E9E9;
+}
+
+.header-title-font{
+    display: flex;
+    align-items: center;
 }
 
 .header-font {
@@ -96,6 +100,7 @@
 #out:hover {
     background-color: #ABCAE8; /* マウスオーバー時の背景色を薄くする */
 }
+
 .container {
     width: 100%;
     display: flex;
@@ -108,7 +113,7 @@
     width: 15%;
     padding: 10px;
     position: absolute;
-    height: 100%;
+    min-height: 100vh;
     background-color: #454545;
     border-right: 20px solid #FFEED5;
     display: flex;
@@ -118,14 +123,40 @@
     color: #E9E9E9;
 }
 
+/* ノートブックアイテムに flex スタイルを適用 */
+.notebooks .clickable-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+/* タイトルとタグをひとつの要素として表示する */
+.item-content {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+}
+
+.item-title {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.item-tags {
+    color: #888897;
+    font-size: 0.9em;
+}
+
 /* デリートボタンのCSSスタイル */
 .delete-button {
+    margin-left: auto; /* ボタンを右端に寄せる */
     background-color: #79A1D4; /* 背景色を赤に */
     color: white; /* テキストを白に */
     border: none; /* ボーダーなし */
     border-radius: 5px; /* 角を丸くする */
-    padding: 8px 16px; /* 内側の余白 */
-    font-size: 14px; /* フォントサイズ */
+    padding: 4px 8px; /* 内側の余白 */
+    font-size: 12px; /* フォントサイズ */
     cursor: pointer; /* カーソルをポインタに */
     transition: background-color 0.3s; /* 背景色の変更をスムーズに */
 }
@@ -165,7 +196,6 @@
     display: none;
     /* 他の要素は非表示 */
 }
-
 /* サイドメニューを縮小したときのスタイル終わり */
 
 /* sidemenuの要素クリックのために追加 */
@@ -186,6 +216,7 @@
     padding: 5px 5px;
     /* ボタンの内側の余白 */
     background-color: #79A1D4;
+    font-size: 20px;
     /* 背景色 */
     color: #EAE4DA;
     /* テキストの色 */
@@ -243,11 +274,10 @@
     /* 他の要素より前に表示する */
 }
 
-.delete-button {
-    margin-left: 10px;
-}
-
-/* sidemenuのクリック 終了 */
+/* .delete-button {
+    /* margin-left: 10px; */
+    /* display: flex;
+} */ 
 
 .main-contents {
     margin-left: calc(15% + 25px);
@@ -260,7 +290,7 @@
     flex-direction: column;
     position: relative;
     /* 重なりを避けるためにrelativeを設定 */
-    height: 100%;
+    min-height: 100vh;
     /* サイドメニューと同じ高さにするため追加 */
     overflow-y: auto;
     /* 縦スクロールを可能に */
@@ -280,6 +310,8 @@
     display: block;
     /* ブロック要素として扱う */
     border: 0px solid #868283;
+    font-family: inherit; /* 親要素から継承するように設定 */
+    font-size: 16px; /* 必要に応じてサイズを調整 */
 
         &::placeholder {
             color: #A3A5AA;
@@ -289,7 +321,6 @@
             outline: 0;
         }
     }
-
 
 #focus {
     position: absolute;
@@ -332,6 +363,10 @@
     /* カーソルをポインタに */
     z-index: 1;
     /* 他の要素より前に表示する */
+}
+
+#save:hover {
+    background-color: #ABCAE8; /* マウスオーバー時の背景色を薄くする */
 }
 
 /* サイドメニューを縮めたときのメインコンテンツの幅の処理 */

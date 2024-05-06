@@ -3,9 +3,9 @@ $(document).ready(function () {
     $("#list_display_switch").on("click", function () {
         $(".side-menu").toggleClass("collapsed");
 
-        // 「三」以外のサイドメニューの子要素を非表示にする
+        // 「三」と「新規作成」ボタン以外のサイドメニューの子要素を非表示にする
         if ($(".side-menu").hasClass("collapsed")) {
-            $(".side-menu").children().not("#list_display_switch").hide();
+            $(".side-menu").children().not("#list_display_switch, #new-key").hide();
         } else {
             $(".side-menu").children().show(); // 全ての子要素を再表示
         }
@@ -99,8 +99,8 @@ function saveStateToLocalStorage() {
         tags
     };
 
-    // ローカルストレージに状態を保存
-    localStorage.setItem('lastState', JSON.stringify(state));
+// ローカルストレージに状態を保存
+localStorage.setItem('lastState', JSON.stringify(state));
 }
 
 // ページを閉じる前に状態を保存

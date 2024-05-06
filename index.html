@@ -17,7 +17,9 @@
   <!-- コンテンツ表示画面 -->
   <header>
     <div class="header-wrapping">
-      <h1 class="header-font">ぽちポケ</h1>
+      <div class="header-title-font">
+      <button id="list_display_switch">三</button><h1 class="header-font">ぽちポケ</h1>
+    </div>
       <input type="text" id="search-box" placeholder="search">
       <div class="header-text">
         <img src="" id="prof">
@@ -32,7 +34,6 @@
     <div class="container">
       <!-- サイドメニュー -->
       <div class="side-menu">
-        <button id="list_display_switch">三</button>
         <div class="notebooks">
           <span>NOTEBOOKS</span>
           <button id="list_display">▽</button>
@@ -183,7 +184,7 @@
             $('#save').removeClass('hidden');
           });
 
-          const deleteButton = $('<button>').text('Delete').addClass('delete-button');
+          const deleteButton = $('<button>').addClass('delete-button').append($('<img>').attr('src', "img/trush.png").attr('alt', 'Delete'));
           deleteButton.on('click', function () {
             remove(ref(db, `users/${uid}/memo/${key}`));
             item.remove();
